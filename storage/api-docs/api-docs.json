@@ -1,0 +1,105 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Money 10 APIs",
+        "description": "L5 Swagger OpenApi description",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost/DifferenzTemplateNew/api",
+            "description": "Local URL Money_10"
+        }
+    ],
+    "paths": {
+        "/Registration": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Registration Process",
+                "description": "DeviceType: 1 IOS, 2 Android, 3 Website, 4 Admin",
+                "operationId": "Registration",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Registration"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Registration successfully."
+                    },
+                    "400": {
+                        "description": "Something went wrong"
+                    },
+                    "101": {
+                        "description": "Email is required."
+                    },
+                    "102": {
+                        "description": "Email already exists."
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Registration": {
+                "properties": {
+                    "FirstName": {
+                        "type": "string"
+                    },
+                    "LastName": {
+                        "type": "string"
+                    },
+                    "Email": {
+                        "type": "string"
+                    },
+                    "Password": {
+                        "type": "string"
+                    },
+                    "ProfilePicture": {
+                        "type": "string",
+                        "format": "binary"
+                    },
+                    "DeviceType": {
+                        "description": "Device Type: 1 - IOS, 2 - Android, 3 - Website, 4 - Admin",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "DeviceToken": {
+                        "type": "string"
+                    },
+                    "SocialType": {
+                        "description": "Social Type: 0 - Default, 1 - Facebook, 2 - Google",
+                        "type": "integer",
+                        "example": 0
+                    },
+                    "SocialIdentifier": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "securitySchemes": {
+            "Authorization": {
+                "type": "http",
+                "name": "Authorization",
+                "in": "header",
+                "scheme": "bearer"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "User",
+            "description": "User"
+        }
+    ]
+}
