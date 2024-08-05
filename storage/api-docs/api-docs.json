@@ -45,6 +45,144 @@
                     }
                 }
             }
+        },
+        "/Login": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Login Process",
+                "description": "DeviceType: 1 IOS, 2 Android, 3 Website, 4 Admin",
+                "operationId": "Login",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Login"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Login successfully."
+                    },
+                    "400": {
+                        "description": "Something went wrong."
+                    },
+                    "404": {
+                        "description": "Account with this email id could not be found."
+                    },
+                    "104": {
+                        "description": "The Password you have entered is invalid."
+                    }
+                }
+            }
+        },
+        "/ChangePassword": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Change Password Process",
+                "description": "DeviceType: 1 IOS, 2 Android, 3 Website, 4 Admin",
+                "operationId": "ChangePassword",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ChangePassword"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Change password successfully."
+                    },
+                    "400": {
+                        "description": "Something went wrong."
+                    },
+                    "401": {
+                        "description": "Authentication token has expired."
+                    },
+                    "404": {
+                        "description": "User not found."
+                    },
+                    "103": {
+                        "description": "The old password you have entered is invalid."
+                    }
+                },
+                "security": [
+                    {
+                        "AuthToken": []
+                    }
+                ]
+            }
+        },
+        "/ForgotPassword": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Forgot Password Process",
+                "description": "DeviceType: 1 IOS, 2 Android, 3 Website, 4 Admin",
+                "operationId": "ForgotPassword",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ForgotPassword"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successfully."
+                    },
+                    "400": {
+                        "description": "Something went wrong."
+                    },
+                    "401": {
+                        "description": "Authentication token has expired."
+                    },
+                    "404": {
+                        "description": "Account with this email id could not be found."
+                    }
+                }
+            }
+        },
+        "/ResetPassword": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Reset Password Process",
+                "description": "DeviceType: 1 IOS, 2 Android, 3 Website, 4 Admin",
+                "operationId": "ResetPassword",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ResetPassword"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Reset password successfully."
+                    },
+                    "404": {
+                        "description": "User not found."
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -81,6 +219,61 @@
                         "example": 0
                     },
                     "SocialIdentifier": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "Login": {
+                "properties": {
+                    "Email": {
+                        "type": "string"
+                    },
+                    "Password": {
+                        "type": "string"
+                    },
+                    "SocialType": {
+                        "type": "integer",
+                        "example": 0
+                    },
+                    "SocialIdentifier": {
+                        "type": "string"
+                    },
+                    "DeviceToken": {
+                        "type": "string"
+                    },
+                    "DeviceType": {
+                        "description": "Device Type: 1 - IOS, 2 - Android, 3 - Website, 4 - Admin",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "ChangePassword": {
+                "properties": {
+                    "OldPassword": {
+                        "type": "string"
+                    },
+                    "NewPassword": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "ForgotPassword": {
+                "properties": {
+                    "Email": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "ResetPassword": {
+                "properties": {
+                    "UserId": {
+                        "type": "string"
+                    },
+                    "Password": {
                         "type": "string"
                     }
                 },

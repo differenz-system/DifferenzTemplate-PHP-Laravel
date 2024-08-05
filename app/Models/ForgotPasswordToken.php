@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class ForgotPasswordToken extends Model
 {
     use HasFactory;
+
+    protected $table='forgot_password_tokens';
+    protected $fillable = [
+        'TokenId',
+        'UserId',
+        'Token',
+    ];
 }

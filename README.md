@@ -72,4 +72,7 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 ### Versioning
 
 - **PHP version**        : ^8.1,
+- **l5-swagger**         : ^8.6,
 - **laravel framework**  : ^10.10,
+- **My SQL version**  : 8.0.37,
+- **symfony/mime**  : ^6.4,
