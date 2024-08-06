@@ -4,16 +4,13 @@
             <li class="nav-header">
                 <div class="dropdown profile-element">
                     {{-- @php $data = Helper::LoggedUser(); @endphp --}}
-                    @php $data = \App\Helper\Helper::LoggedUser(); @endphp
-                    @if($data->ProfilePicture == '' || $data->ProfilePicture == null)
-                        @php $Image = asset('storage/admin/images/profile/user-not-found.png') @endphp
-                    @else
-                        @if(file_exists(storage_path('admin/images/profile/'.$data->ProfilePicture)))
-                            @php $Image = asset('storage/admin/images/profile').'/'.$data->ProfilePicture @endphp
-                        @else
-                            @php $Image = asset('storage/admin/images/profile/user-not-found.png') @endphp
-                        @endif
-                    @endif  
+                    @php 
+                        $data = \App\Helper\Helper::LoggedUser(); 
+                        $defaultImage = 'storage/admin/images/profile_pic/user-not-found.png';
+                        $profileImagePath = 'storage/admin/images/profile_pic/' . $data->ProfilePicture;
+                        $Image = file_exists(public_path($profileImagePath)) ? asset($profileImagePath) : asset($defaultImage);
+                    @endphp
+                    
                     <img style="height: 50px;width: 50px;" alt="image" class="rounded-circle" src="{{$Image}}"/>
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                         <span class="block m-t-xs font-bold">{{ session('AdminName') }}</span>

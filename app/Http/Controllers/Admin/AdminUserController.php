@@ -26,16 +26,16 @@ class AdminUserController extends Controller
                 'SocialType',
                 'UserId'
             ])->where('Role',1)->where('IsDelete', 0)->get();
-
+                // dd($data);
             return Datatables::of($data)
                 ->editColumn('ProfilePicture', function ($data) {
                     if ($data->ProfilePicture == '' || $data->ProfilePicture == null) {
-                        $image = url('storage/admin/images/profile/user-not-found.png');
+                        $image = url('storage/admin/images/profile_pic/user-not-found.png');
                     } else {
-                        if (file_exists(storage_path('web/images/profile/' . $data->ProfilePicture))) {
+                        if (file_exists(public_path('storage/web/images/profile/' . $data->ProfilePicture))) {
                             $image = url('storage/web/images/profile') . '/' . $data->ProfilePicture;
                         } else {
-                            $image = url('storage/admin/images/profile/user-not-found.png');
+                            $image = url('storage/admin/images/profile_pic/user-not-found.png');
                         }
                     }
                     return $image;

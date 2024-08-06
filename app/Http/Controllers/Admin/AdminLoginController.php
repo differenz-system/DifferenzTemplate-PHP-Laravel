@@ -22,12 +22,11 @@ class AdminLoginController extends Controller
         $result = User::where('Role', 2)->where('DeviceType', 4)->where('IsDelete', 0)->first();
         if ($result) {
             if (strtolower($request->email) == strtolower($result->Email)) {
-                // dd($result);
                 if (Hash::check($request->password, $result->Password)) {
                     Session::put('AdminId', $result->UserId);
                     Session::put('AdminEmail', $result->Email);
                     Session::put('AdminName', $result->FirstName . ' ' . $result->LastName);
-                    // dd($result->FirstName . ' ' . $result->LastName);
+
                     return redirect(route('dashboard'));
                 } else {
                     $message = 'Invalid Password.';
@@ -51,21 +50,32 @@ class AdminLoginController extends Controller
 
     public function UpdateProfileImage(Request $request)
     {
-        $image = $this->UploadImageBase64($request->file_photo, storage_path('admin/images/profile'), $request->image1);
-        if ($image) {
-            $Update = User::where('UserId', Session::get('AdminId'))->update(['ProfilePicture' => $image]);
+        if ($request->file('file_photo')) {
+            $image = $request->file('file_photo');
+            $imageName = time() . '.' . $image->extension();
+            $upload = $image->storeAs('admin/images/profile_pic', $imageName, 'public');
+
+            if ($upload) {
+                $Update = User::where('UserId', Session::get('AdminId'))->update([
+                    'ProfilePicture' => $imageName,
+                    'updated_at'  => now(),
+                ]);
+
+                return redirect('admin/profile')->with('change-message', 'Profile photo change successfully');
+            } else {
+                return back()->withErrors('Failed to upload image.');
+            }
+        } else {
+            return back()->withErrors('No image uploaded.');
         }
-        return redirect('admin/profile');
     }
 
     public function CheckOldPassword(Request $request)
     {
         $user = User::find(Session::get('AdminId'));
-
         if ($user && Hash::check($request->old_password, $user->Password)) {
             return "true";
         }
-
         return "false";
     }
 
@@ -73,9 +83,9 @@ class AdminLoginController extends Controller
     {
         User::where('UserId', Session::get('AdminId'))->update([
             'Password' => bcrypt($request->new_password),
-            'Updated'  => now()->format('Y-m-d H:i:s'),
+            'updated_at'  => now()->format('Y-m-d H:i:s'),
         ]);
-    
+
         return redirect('admin/profile')->with('change-message', 'Profile updated successfully');
     }
 

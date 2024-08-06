@@ -10,6 +10,10 @@ class ForgotPasswordToken extends Model
     use HasFactory;
 
     protected $table='forgot_password_tokens';
+    protected $primaryKey = 'TokenId';
+    public $incrementing = false;
+    protected $keyType = 'string';
+
     protected $fillable = [
         'TokenId',
         'UserId',

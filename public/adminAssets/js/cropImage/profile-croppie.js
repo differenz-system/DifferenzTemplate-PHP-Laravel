@@ -50,7 +50,7 @@ $('#cropImageBtn').on('click', function (ev) {
         format: 'jpeg',
         size: {width: 160, height: 100}
     }).then(function (resp) {
-        console.log(resp);
+        // console.log(resp);
         $('#item-img-output').attr('src', resp);
         $('#image1').val(resp);
         $('.profile-avator').attr ( 'src' , resp);
