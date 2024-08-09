@@ -1,14 +1,14 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "Money 10 APIs",
+        "title": "Differenz Template",
         "description": "L5 Swagger OpenApi description",
         "version": "1.0.0"
     },
     "servers": [
         {
             "url": "http://localhost/DifferenzTemplateNew/api",
-            "description": "Local URL Money_10"
+            "description": "Local URL Differenz_Template"
         }
     ],
     "paths": {
