@@ -18,9 +18,7 @@ $(document).ready(function () {
                 width: "10%",
                 render: function (data, type, row) {
                     return (
-                        "<img style='height:50px;width:50px;' src='" +
-                        data +
-                        "'>"
+                        "<img style='height:50px;width:50px;' src='" + data + "'>"
                     );
                 },
             },

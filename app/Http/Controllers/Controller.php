@@ -14,13 +14,13 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 /**
  * @OA\Info(
  *      version="1.0.0",
- *      title="Money 10 APIs",
+ *      title="Differenz Template",
  *      description="L5 Swagger OpenApi description",
  * )
  * 
  * @OA\Server(
  *      url=L5_SWAGGER_CONST_HOST,
- *      description="Local URL Money_10"
+ *      description="Local URL Differenz_Template"
  * )
  * @OA\SecurityScheme(
  *      securityScheme="Authorization", 
