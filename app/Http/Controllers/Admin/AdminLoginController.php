@@ -6,46 +6,65 @@ use Carbon\Carbon;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class AdminLoginController extends Controller
 {
     public function login()
     {
-        return view('/Admin/login');
+        return view('admin.pages.auth.login');
     }
 
     public function dologin(Request $request)
     {
-        $result = User::where('Role', 2)->where('DeviceType', 4)->where('IsDelete', 0)->first();
-        if ($result) {
-            if (strtolower($request->email) == strtolower($result->Email)) {
-                if (Hash::check($request->password, $result->Password)) {
-                    Session::put('AdminId', $result->UserId);
-                    Session::put('AdminEmail', $result->Email);
-                    Session::put('AdminName', $result->FirstName . ' ' . $result->LastName);
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
 
-                    return redirect(route('dashboard'));
-                } else {
-                    $message = 'Invalid Password.';
-                }
-            } else {
-                $message = 'Invalid Email.';
-            }
-        } else {
-            $message = 'Invalid User.';
+        if ($validator->fails()) {
+            return response()->json(['success' => false, 'code' => 202, 'message' => implode("<br>", $validator->errors()->all())], 202);
         }
+        
+        $user = User::where('email', $request->email)
+            ->where('Role', 2)
+            ->where('DeviceType', 4)
+            ->where('IsDelete', 0)
+            ->first();
 
-        Session::flash('message', $message);
-        return redirect()->back();
+        if ($user && Hash::check($request->password, $user->Password)) {
+            // dd($user);
+            Auth::guard('web')->login($user);
+
+            Session::put('AdminId', $user->UserId);
+            Session::put('AdminEmail', $user->Email);
+            Session::put('AdminName', $user->FirstName . ' ' . $user->LastName);
+
+            return response()->json([
+                'success' => true,
+                'code' => 200,
+                'message' => 'Logged in successfully.',
+                'data' => [],
+            ], 200);
+        } else {
+            return response()->json([
+                'success' => false,
+                'code' => 202,
+                'message' => 'Invalid credentials',
+                'data' => [],
+            ], 202);
+        }
     }
 
     public function EditProfile()
     {
         $admin = User::where('UserId', Session::get('AdminId'))->first();
-        return view('Admin.edit-profile', compact('admin'));
+        
+        return view('admin.pages.profile.edit', compact('admin'));
     }
 
     public function UpdateProfileImage(Request $request)
@@ -61,12 +80,12 @@ class AdminLoginController extends Controller
                     'updated_at'  => now(),
                 ]);
 
-                return redirect('admin/profile')->with('change-message', 'Profile photo change successfully');
+                return redirect(route('profile_page'))->with('status', 'success')->with('message', 'Profile photo changed successfully.');
             } else {
-                return back()->withErrors('Failed to upload image.');
+                return redirect(route('profile_page'))->with('status', 'error')->with('message', 'Failed to upload image.');
             }
         } else {
-            return back()->withErrors('No image uploaded.');
+            return redirect(route('profile_page'))->with('status', 'error')->with('message', 'No image uploaded.');
         }
     }
 
@@ -81,12 +100,16 @@ class AdminLoginController extends Controller
 
     public function ChangePassword(Request $request)
     {
-        User::where('UserId', Session::get('AdminId'))->update([
+        $user = User::where('UserId', Session::get('AdminId'))->update([
             'Password' => bcrypt($request->new_password),
             'updated_at'  => now()->format('Y-m-d H:i:s'),
         ]);
 
-        return redirect('admin/profile')->with('change-message', 'Profile updated successfully');
+        if($user){
+            return redirect(route('profile_page'))->with('status', 'success')->with('message', 'Password changed successfully.');
+        }else{
+            return redirect(route('profile_page'))->with('status', 'error')->with('message', 'Failed to change password.');
+        }
     }
 
     public function Logout(Request $request)

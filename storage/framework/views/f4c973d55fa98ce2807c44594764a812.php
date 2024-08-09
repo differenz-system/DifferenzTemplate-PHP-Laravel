@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -37,8 +36,7 @@
                                 <h5>Profile Detail</h5>
                             </div>
                             <div>
-                                <form action="<?php echo e(route('updateprofileimage')); ?>" method="POST"
-                                    enctype="multipart/form-data">
+                                <form action="<?php echo e(route('updateprofileimage')); ?>" method="POST" enctype="multipart/form-data">
                                     <?php echo csrf_field(); ?>
                                     <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                         <label class="cabinet center-block">

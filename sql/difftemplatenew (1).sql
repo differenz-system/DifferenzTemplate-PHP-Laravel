@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Aug 06, 2024 at 03:12 PM
+-- Generation Time: Aug 09, 2024 at 01:21 PM
 -- Server version: 8.0.39-0ubuntu0.22.04.1
 -- PHP Version: 8.1.29
 
@@ -146,8 +146,9 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`UserId`, `Role`, `FirstName`, `LastName`, `Email`, `Password`, `AuthToken`, `DeviceToken`, `DeviceType`, `SocialType`, `SocialIdentifier`, `ProfilePicture`, `IsDelete`, `remember_token`, `created_at`, `updated_at`) VALUES
 ('9eaTdVDoqmwh82NVvCWdczrYIJ3DOWkB', 1, 'john', 'lewis', 'john@yopmail.com', '$2y$10$7GER5bE8SXsTaZFy3nTz0.bhqc5yuJk4B8IySmLKtVvi1fwihVNgm', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.RGlmZmVyZW56UHJvamVjdA.5KR05FpSU9TvTLGbcJx580w6QmZBJa34RcSU5t6RMdQ', '', 1, 0, '123', '1578045981.jpg', '0', NULL, '2020-01-03 04:36:21', '2024-08-02 07:53:31'),
 ('9KlMPBCPPSELEEVpeYWwuVUGWPPSgyZC', 1, 'test', 'test', 'test@gmail.com', '$2y$12$havbmwUYGoMP4OmSsgtbcOao9qHrPZAxun3t.o4wB1Hr2P//bdq9m', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.RGlmZmVyZW56UHJvamVjdA.9OkuJ9O-xMvBMdJgNKvcy55_KcGq-BV6-javYVTq0uo', '', 1, 0, '', '', '0', NULL, '2024-08-02 09:05:18', '2024-08-02 09:05:18'),
-('aff878cdd4dd790ecc8a21832aa59a61', 2, 'Differenz', 'Project', 'differenzproject@yopmail.com', '$2y$12$we51KArRp.knzEuawbGjfOGdEWAlCqQvmGs0vvF4dUWc25nIx/8S2', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.RGlmZmVyZW56UHJvamVjdA.QhbUhWw3GY_ZS1u6i1k48XL_iiKo9rbAvsBGtrjX2q0', 'string', 4, 0, NULL, '1722936315.png', '0', NULL, '2019-11-14 10:35:41', '2024-08-06 03:55:15'),
-('pESzFqyJSmPeRCcO5l7tVDU07Ddj4IGv', 1, 'abc', 'abc', 'abc@gmail.com', '$2y$12$we51KArRp.knzEuawbGjfOGdEWAlCqQvmGs0vvF4dUWc25nIx/8S2', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.RGlmZmVyZW56UHJvamVjdA.Vh_9gWJGcKFkQ7HhDLO7RjnAnY67rxaWZqmCoH1kl0k', '', 1, 0, NULL, '', '0', NULL, '2024-08-04 23:39:09', '2024-08-05 01:45:06');
+('aff878cdd4dd790ecc8a21832aa59a61', 2, 'Differenz', 'Project', 'differenzproject@yopmail.com', '$2y$12$UgIplf.XrjciDvtNeW9rCu5cDzSqORNbFKWMYXwqpijt7GHTDKI.2', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.RGlmZmVyZW56UHJvamVjdA.QhbUhWw3GY_ZS1u6i1k48XL_iiKo9rbAvsBGtrjX2q0', 'string', 4, 0, NULL, '1723189584.png', '0', NULL, '2019-11-14 10:35:41', '2024-08-09 02:16:24'),
+('aff878cdd4dd790ecc8a21832aa59a62', 2, 'Differenz', 'Project', 'differenzproject2@yopmail.com', '$2y$12$we51KArRp.knzEuawbGjfOGdEWAlCqQvmGs0vvF4dUWc25nIx/8S2', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.RGlmZmVyZW56UHJvamVjdA.QhbUhWw3GY_ZS1u6i1k48XL_iiKo9rbAvsBGtrjX2q0', 'string', 4, 0, NULL, '1722936315.png', '1', NULL, '2019-11-14 10:35:41', '2024-08-06 03:55:15'),
+('pESzFqyJSmPeRCcO5l7tVDU07Ddj4IGv', 1, 'abc', 'abc', 'abc@gmail.com', '$2y$12$we51KArRp.knzEuawbGjfOGdEWAlCqQvmGs0vvF4dUWc25nIx/8S2', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.RGlmZmVyZW56UHJvamVjdA.Vh_9gWJGcKFkQ7HhDLO7RjnAnY67rxaWZqmCoH1kl0k', '', 1, 0, NULL, '', '0', NULL, '2024-08-04 23:39:09', '2024-08-08 07:31:27');
 
 --
 -- Indexes for dumped tables

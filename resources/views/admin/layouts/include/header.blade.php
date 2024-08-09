@@ -5,10 +5,12 @@
         </div>
         <ul class="nav navbar-top-links navbar-right">
             <li>
-                <span class="m-r-sm text-muted welcome-message">Welcome to {{env('PROJECT_NAME')}}.</span>
+                <span class="m-r-sm text-muted welcome-message">
+                    Welcome {{ Auth::guard('web')->user()->FirstName }} {{ Auth::guard('web')->user()->LastName }}
+                </span>
             </li>
             <li>
-                <a href="{{url('admin/logout')}}">
+                <a href="{{ route('logout') }}">
                     <i class="fa fa-sign-out"></i> Log out
                 </a>
             </li>
